@@ -1,0 +1,31 @@
+{
+    "version": "0.3.0",
+    "configurations": [
+        {
+            "name": "Remote GDB Launch (RPi0)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "customLaunchSetupCommands": [
+                {
+                    "text": "target remote | ssh RPi0 gdbserver - '~/${command:cmake.launchTargetFilename}' --name ${env:USER}",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "set sysroot '/var/lib/schroot/chroots/rpizero-buster-armhf'",
+                    "ignoreFailures": false
+                },
+            ],
+            "stopAtEntry": true,
+            "targetArchitecture": "arm",
+            // "miDebuggerPath": "armv6-rpi-linux-gnueabihf-gdb",
+            "miDebuggerPath": "gdb-multiarch",
+            "MIMode": "gdb",
+            "externalConsole": false,
+            "preLaunchTask": "Copy executable (RPi0)",
+        }
+    ]
+}
