@@ -1,16 +1,16 @@
 set(CMAKE_SYSTEM_NAME Linux)
-set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(CMAKE_SYSTEM_PROCESSOR arm)
 
-set(CMAKE_SYSROOT /var/lib/schroot/chroots/focal-arm64)
-SET(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT}) 
-set(CMAKE_LIBRARY_ARCHITECTURE aarch64-linux-gnu)
-set(CMAKE_STAGING_PREFIX $ENV{HOME}/RPi-dev/staging-aarch64-rpi3)
+set(CMAKE_SYSROOT /var/lib/schroot/chroots/rpizero-buster-armhf)
+SET(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT})
+set(CMAKE_STAGING_PREFIX $ENV{HOME}/RPi-dev/staging-armv6-rpi)
+set(CMAKE_LIBRARY_ARCHITECTURE arm-linux-gnueabihf)
 
-set(cross "aarch64-linux-gnu")
+set(cross "armv6-rpi-linux-gnueabihf")
 set(CMAKE_C_COMPILER ${cross}-gcc)
 set(CMAKE_CXX_COMPILER ${cross}-g++)
 
-set(ARCH_FLAGS "-mcpu=cortex-a53+crypto+crc+simd")
+set(ARCH_FLAGS "-mcpu=arm1176jzf-s")
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ARCH_FLAGS}")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ARCH_FLAGS}")
 
@@ -19,4 +19,4 @@ set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
 
-set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE arm64)
+set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE armhf)
