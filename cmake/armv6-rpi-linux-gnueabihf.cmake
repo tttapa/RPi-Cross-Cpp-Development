@@ -1,7 +1,7 @@
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
-set(CMAKE_SYSROOT /var/lib/schroot/chroots/rpizero-buster-armhf)
+set(CMAKE_SYSROOT /var/lib/schroot/chroots/schroot-name-armhf)
 SET(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT})
 set(CMAKE_LIBRARY_ARCHITECTURE arm-linux-gnueabihf)
 set(CMAKE_STAGING_PREFIX $ENV{HOME}/RPi-dev/staging-armv6-rpi)
