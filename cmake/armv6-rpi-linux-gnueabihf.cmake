@@ -3,12 +3,13 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 
 set(CMAKE_SYSROOT /var/lib/schroot/chroots/rpizero-buster-armhf)
 SET(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT})
-set(CMAKE_STAGING_PREFIX $ENV{HOME}/RPi-dev/staging-armv6-rpi)
 set(CMAKE_LIBRARY_ARCHITECTURE arm-linux-gnueabihf)
+set(CMAKE_STAGING_PREFIX $ENV{HOME}/RPi-dev/staging-armv6-rpi)
 
 set(cross "armv6-rpi-linux-gnueabihf")
 set(CMAKE_C_COMPILER ${cross}-gcc)
 set(CMAKE_CXX_COMPILER ${cross}-g++)
+set(CMAKE_Fortran_COMPILER ${cross}-gfortran)
 
 set(ARCH_FLAGS "-mcpu=arm1176jzf-s")
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${ARCH_FLAGS}")
