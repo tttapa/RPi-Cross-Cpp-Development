@@ -9,23 +9,87 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "customLaunchSetupCommands": [
+            "miDebuggerServerAddress": "| ssh -T RPi0 gdbserver - '~/${command:cmake.launchTargetFilename}' --name ${env:USER}",
+            "setupCommands": [
                 {
-                    "text": "target remote | ssh RPi0 gdbserver - '~/${command:cmake.launchTargetFilename}' --name ${env:USER}",
+                    "text": "set auto-load safe-path /var/lib/schroot/chroots/rpizero-buster-armhf/usr/share/gdb",
+                    "description": "Allow loading scripts from the sysroot (which requires some further tweaking to get it to work)",
                     "ignoreFailures": false
                 },
                 {
-                    "text": "set sysroot '/var/lib/schroot/chroots/rpizero-buster-armhf'",
+                    "text": "set sysroot /var/lib/schroot/chroots/rpizero-buster-armhf",
+                    "description": "Set the sysroot folder to load libraries",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "python sys.path.insert(0, '/var/lib/schroot/chroots/rpizero-buster-armhf/usr/share/gcc/python');",
+                    "description": "Update Python path for GDB pretty printing",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "-enable-pretty-printing",
+                    "description": "Enable GDB pretty printing",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "skip -rfu ^std::.*",
+                    "description": "Don't step into standard library functions",
                     "ignoreFailures": false
                 },
             ],
             "stopAtEntry": true,
             "targetArchitecture": "arm",
-            // "miDebuggerPath": "armv6-rpi-linux-gnueabihf-gdb",
-            "miDebuggerPath": "gdb-multiarch",
+            "miDebuggerPath": "armv6-rpi-linux-gnueabihf-gdb",
+            "miDebuggerArgs": "--data-directory /var/lib/schroot/chroots/rpizero-buster-armhf/usr/share/gdb",
+            // "miDebuggerPath": "gdb-multiarch",
             "MIMode": "gdb",
             "externalConsole": false,
             "preLaunchTask": "Copy executable (RPi0)",
+        },
+        {
+            "name": "Remote GDB Launch (RPi3)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "miDebuggerServerAddress": "| ssh -T RPi3 gdbserver - '~/${command:cmake.launchTargetFilename}' --name ${env:USER}",
+            "setupCommands": [
+                {
+                    "text": "set auto-load safe-path /var/lib/schroot/chroots/rpi3-impish-arm64/usr/share/gdb",
+                    "description": "Allow loading scripts from the sysroot (which requires some further tweaking to get it to work)",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "set sysroot /var/lib/schroot/chroots/rpi3-impish-arm64",
+                    "description": "Set the sysroot folder to load libraries",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "python sys.path.insert(0, '/var/lib/schroot/chroots/rpi3-impish-arm64/usr/share/gcc/python');",
+                    "description": "Update Python path for GDB pretty printing",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "-enable-pretty-printing",
+                    "description": "Enable GDB pretty printing",
+                    "ignoreFailures": false
+                },
+                {
+                    "text": "skip -rfu ^std::.*",
+                    "description": "Don't step into standard library functions",
+                    "ignoreFailures": false
+                },
+            ],
+            "stopAtEntry": true,
+            "targetArchitecture": "arm64",
+            "miDebuggerPath": "aarch64-rpi3-linux-gnu-gdb",
+            "miDebuggerArgs": "--data-directory /var/lib/schroot/chroots/rpi3-impish-arm64/usr/share/gdb",
+            // "miDebuggerPath": "gdb-multiarch",
+            "MIMode": "gdb",
+            "externalConsole": false,
+            "preLaunchTask": "Copy executable (RPi3)",
         }
     ]
 }

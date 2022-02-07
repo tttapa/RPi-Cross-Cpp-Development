@@ -8,6 +8,12 @@
             "type": "shell",
             "command": "scp ${command:cmake.launchTargetPath} RPi0:~",
             "problemMatcher": []
+        },
+        {
+            "label": "Copy executable (RPi3)",
+            "type": "shell",
+            "command": "scp ${command:cmake.launchTargetPath} RPi3:~",
+            "problemMatcher": []
         }
     ]
 }
