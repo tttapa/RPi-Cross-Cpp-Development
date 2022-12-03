@@ -3,9 +3,11 @@
 #include <thread>
 using namespace std::chrono_literals;
 
+const int led_pin_number = 24;
+
 int main() {
     gpiod::chip gpio {"pinctrl-bcm2835", gpiod::chip::OPEN_BY_LABEL};
-    auto led_pin = gpio.get_line(24);
+    auto led_pin = gpio.get_line(led_pin_number);
     led_pin.request({"LED", gpiod::line_request::DIRECTION_OUTPUT});
 
     while (1) {
